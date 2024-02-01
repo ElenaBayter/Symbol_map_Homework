@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input" type="text" placeholder="Input your review...">
+    <button class="btn">Send</button>
+    <ul class="container">
+        <div class="div"></div>
+    </ul>
+
+    <script>
+        const input = document.querySelector('#input');
+        const btn = document.querySelector('.btn');
+        const ul = document.querySelector('.container');
+        const div = document.querySelector('.div');
+
+
+        function addReview(){
+            div.textContent = '';
+            try {
+                if (input.value.length < 50 || input.value.length > 500){
+                    throw new Error ('The length of review should be between 50 and 500 symbols')
+                }
+                const li = document.createElement('li');
+                li.textContent = input.value;
+                ul.insertAdjacentElement("beforeend", li);
+                input.value = '';
+            } catch (error) {
+                div.textContent = error.message   
+            }
+            finally{
+                console.log('Done');
+            }
+        }
+        btn.addEventListener('click', addReview);
+    </script>
+</body>
+</html>
